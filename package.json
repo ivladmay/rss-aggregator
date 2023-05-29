@@ -5,7 +5,12 @@
   "main": "index.js",
   "author": "Vladislav Mayakin",
   "dependencies": {
-    "bootstrap": "^5.2.3"
+    "axios": "^1.4.0",
+    "bootstrap": "^5.2.3",
+    "i18next": "^22.5.0",
+    "lodash": "^4.17.21",
+    "on-change": "^4.0.2",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "css-loader": "^6.8.1",
