@@ -37,7 +37,15 @@ const renderPosts = (state, elements, translation) => {
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
     a.textContent = post.title;
-    listItem.append(a);
+
+    const itemButton = document.createElement('button');
+    itemButton.setAttribute('type', 'button');
+    itemButton.classList.add('btn', 'btn-outline-primary', 'btn-sm');
+    itemButton.setAttribute('data-id', post.id);
+    itemButton.setAttribute('data-bs-toggle', 'modal');
+    itemButton.setAttribute('data-bs-target', '#modal');
+    itemButton.textContent = translation('viewing');
+    listItem.append(a, itemButton);
   });
 };
 
@@ -92,6 +100,13 @@ const renderErrors = (elements, error, translation) => {
   elements.feedback.textContent = translation(error.message);
 };
 
+const renderModalWindow = (state, elements, postId) => {
+  const post = state.posts.find(({ id }) => id === postId);
+  elements.modal.title.textContent = post.title;
+  elements.modal.description.textContent = post.description;
+  elements.modal.fullArticleBtn.href = post.link;
+};
+
 const handleProcessState = (elements, processState) => {
   switch (processState) {
     case 'filling':
@@ -115,6 +130,9 @@ const render = (state, elements, translation) => (path, value) => {
       break;
     case 'feeds':
       renderFeeds(state, elements, translation);
+      break;
+    case 'uiState.idOfPostRelatedToModal':
+      renderModalWindow(state, elements, value);
       break;
     case 'uiState.idsViewedPosts':
       renderPosts(state, elements, translation);

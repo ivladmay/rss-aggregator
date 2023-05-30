@@ -1,7 +1,7 @@
 {
   "name": "rss-aggregator",
   "version": "1.0.0",
-  "description": "RSS reader — a service for aggregating RSS feeds that makes it easy to read a variety of sources, such as blogs.",
+  "description": "RSS aggregator — a service for aggregating RSS feeds that makes it easy to read a variety of sources, such as blogs.",
   "main": "index.js",
   "author": "Vladislav Mayakin",
   "dependencies": {

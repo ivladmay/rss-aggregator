@@ -77,6 +77,7 @@ const app = () => {
         posts: [],
         uiState: {
           idsViewedPosts: new Set(),
+          idOfPostRelatedToModal: null,
         },
       };
 
@@ -87,6 +88,13 @@ const app = () => {
         submitButton: document.querySelector('button[type="submit"]'),
         containerPosts: document.querySelector('.posts'),
         containerFeeds: document.querySelector('.feeds'),
+        viewPostButton: document.querySelector('button[type="button"]'),
+        modal: {
+          modalElement: document.querySelector('.modal'),
+          title: document.querySelector('.modal-title'),
+          description: document.querySelector('.modal-body'),
+          fullArticleBtn: document.querySelector('.full-article'),
+        },
       };
 
       const watchedState = onChange(initialState, render(initialState, elements, translation));
@@ -125,6 +133,12 @@ const app = () => {
           .finally(() => {
             watchedState.form.processState = 'filling';
           });
+      });
+
+      elements.modal.modalElement.addEventListener('shown.bs.modal', (e) => {
+        const id = e.relatedTarget.getAttribute('data-id');
+        watchedState.uiState.idsViewedPosts.add(id);
+        watchedState.uiState.idOfPostRelatedToModal = id;
       });
 
       elements.containerPosts.addEventListener('click', (e) => {
